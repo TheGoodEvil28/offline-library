@@ -1,33 +1,31 @@
-import express from "express";
-import fs from "fs";
-import cors from "cors";
+const express = require("express");
+const path = require("path");
+const fs = require("fs");
 
 const app = express();
-const PORT = 5000;
-const FILE_PATH = "./books.json";
-
-app.use(cors());
 app.use(express.json());
 
+// Serve React static files
+app.use(express.static(path.join(__dirname, "public")));
+
+// API Endpoint
 app.get("/api/books", (req, res) => {
-  const books = fs.existsSync(FILE_PATH)
-    ? JSON.parse(fs.readFileSync(FILE_PATH))
-    : [];
+  const books = JSON.parse(fs.readFileSync("books.json"));
   res.json(books);
 });
 
 app.post("/api/books", (req, res) => {
-  const { title, author, category, link } = req.body;
-  if (!title || !author || !category || !link)
-    return res.status(400).json({ message: "All fields required" });
-
-  const books = fs.existsSync(FILE_PATH)
-    ? JSON.parse(fs.readFileSync(FILE_PATH))
-    : [];
-  books.push({ title, author, category, link });
-
-  fs.writeFileSync(FILE_PATH, JSON.stringify(books, null, 2));
-  res.json({ message: "Book added!" });
+  const books = JSON.parse(fs.readFileSync("books.json"));
+  books.push(req.body);
+  fs.writeFileSync("books.json", JSON.stringify(books, null, 2));
+  res.json({ message: "Buku ditambahkan!" });
 });
 
-app.listen(PORT, () => console.log(`Backend running at http://localhost:${PORT}`));
+// Fallback ke index.html (React routing)
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
+
+app.listen(5000, () => {
+  console.log("Backend running at http://localhost:5000");
+});
