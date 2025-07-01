@@ -13,7 +13,7 @@ export default function AddBookForm({ onBookAdded }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await fetch("http://localhost:5000/api/books", {
+    const res = await fetch("/api/books", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(form)
@@ -43,7 +43,12 @@ export default function AddBookForm({ onBookAdded }) {
         placeholder="Penulis"
         required
       />
-      <select name="category" value={form.category} onChange={handleChange} required>
+      <select
+        name="category"
+        value={form.category}
+        onChange={handleChange}
+        required
+      >
         <option value="">Pilih Kategori</option>
         <option value="Informatika">Informatika</option>
         <option value="Biologi">Biologi</option>

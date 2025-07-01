@@ -1,32 +1,31 @@
 import React, { useEffect, useState } from "react";
 import BookCard from "./components/BookCard";
 import AddBookForm from "./components/AddBookForm";
-
 import "./index.css";
 
 function App() {
   const [books, setBooks] = useState([]);
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("all");
-
-  useEffect(() => {
-    fetch("http://localhost:5000/api/books")
-
-      .then((res) => res.json())
-      .then((data) => setBooks(data));
-  }, []);
+  const [loading, setLoading] = useState(true);
 
   const fetchBooks = () => {
-  fetch("http://localhost:5000/api/books")
+    setLoading(true);
+    fetch("/api/books")
+      .then((res) => res.json())
+      .then((data) => {
+        setBooks(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Gagal memuat buku:", err);
+        setLoading(false);
+      });
+  };
 
-    .then((res) => res.json())
-    .then((data) => setBooks(data));
-};
-
-useEffect(() => {
-  fetchBooks();
-}, []);
-
+  useEffect(() => {
+    fetchBooks();
+  }, []);
 
   const filteredBooks = books.filter((book) => {
     const matchText =
@@ -46,10 +45,6 @@ useEffect(() => {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
-<h2>Tambah Buku Baru</h2>
-<AddBookForm onBookAdded={fetchBooks} />
-
-
 
       <select value={category} onChange={(e) => setCategory(e.target.value)}>
         <option value="all">Semua Kategori</option>
@@ -57,8 +52,13 @@ useEffect(() => {
         <option value="Biologi">Biologi</option>
       </select>
 
+      <h2>Tambah Buku Baru</h2>
+      <AddBookForm onBookAdded={fetchBooks} />
+
       <div className="book-list">
-        {filteredBooks.length === 0 ? (
+        {loading ? (
+          <p>Memuat data buku...</p>
+        ) : filteredBooks.length === 0 ? (
           <p>Tidak ada buku ditemukan.</p>
         ) : (
           filteredBooks.map((book, idx) => (
