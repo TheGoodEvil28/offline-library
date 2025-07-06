@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perpustakaan Digital</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 50px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            color: white;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .header p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .subtitle {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.1rem;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .genres-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .genre-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 35px;
+            text-align: center;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .genre-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            transition: left 0.5s ease;
+        }
+
+        .genre-card:hover::before {
+            left: 0;
+        }
+
+        .genre-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.15);
+            background: rgba(255, 255, 255, 1);
+        }
+
+        .genre-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            display: block;
+            animation: bounce 2s infinite;
+            position: relative;
+            z-index: 1;
+        }
+
+        .genre-card:hover .genre-icon {
+            animation: pulse 1s infinite;
+            transform: scale(1.1);
+        }
+
+        .genre-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #333;
+            position: relative;
+            z-index: 1;
+        }
+
+        .genre-description {
+            font-size: 1rem;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .genre-link-text {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .genre-card:hover .genre-link-text {
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .stats-section {
+            text-align: center;
+            margin-top: 50px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .stat-item {
+            color: white;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { 
+                transform: scale(1.1); 
+            }
+            50% { 
+                transform: scale(1.2); 
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            .header h1 {
+                font-size: 2.5rem;
+            }
+
+            .header p {
+                font-size: 1.1rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .genres-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .genre-card {
+                padding: 25px;
+            }
+
+            .genre-icon {
+                font-size: 3rem;
+            }
+
+            .genre-title {
+                font-size: 1.5rem;
+            }
+
+            .genre-description {
+                font-size: 0.9rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 30px 15px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .genre-card {
+                padding: 20px;
+            }
+
+            .genre-icon {
+                font-size: 2.5rem;
+            }
+
+            .genre-title {
+                font-size: 1.3rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animation delays for cards */
+        .genre-card:nth-child(1) { animation: fadeInUp 0.8s ease-out 0.1s both; }
+        .genre-card:nth-child(2) { animation: fadeInUp 0.8s ease-out 0.2s both; }
+        .genre-card:nth-child(3) { animation: fadeInUp 0.8s ease-out 0.3s both; }
+        .genre-card:nth-child(4) { animation: fadeInUp 0.8s ease-out 0.4s both; }
+        .genre-card:nth-child(5) { animation: fadeInUp 0.8s ease-out 0.5s both; }
+        .genre-card:nth-child(6) { animation: fadeInUp 0.8s ease-out 0.6s both; }
+        .genre-card:nth-child(7) { animation: fadeInUp 0.8s ease-out 0.7s both; }
+        .genre-card:nth-child(8) { animation: fadeInUp 0.8s ease-out 0.8s both; }
+        .genre-card:nth-child(9) { animation: fadeInUp 0.8s ease-out 0.9s both; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 Perpustakaan Digital</h1>
+            <p>Jelajahi Koleksi Buku Berdasarkan Genre</p>
+            <p class="subtitle">Temukan ribuan buku berkualitas dalam berbagai kategori</p>
+        </div>
+
+        <div class="genres-grid">
+            <a href="https://drive.google.com/drive/folders/1N38iTkIsdh5_UibINwkjMeam4GqtL4QO?usp=drive_link"" class="genre-card" target="_blank" rel="noopener noreferrer">
+                <span class="genre-icon">🌿</span>
+                <h3 class="genre-title">Hewan dan Tumbuhan</h3>
+                <p class="genre-description">Eksplorasi dunia fauna dan flora dengan koleksi buku tentang kehidupan hewan, tumbuhan, dan ekosistem alam</p>
+                <span class="genre-link-text">Jelajahi Koleksi →</span>
+            </a>
+
+            <a href="https://drive.google.com/drive/folders/18aib3MwVGDli1kMjRj6WNbIQuFqBBVYC?usp=drive_link" class="genre-card" target="_blank" rel="noopener noreferrer">
+                <span class="genre-icon">🏛️</span>
+                <h3 class="genre-title">Arsitektur</h3>
+                <p class="genre-description">Pelajari seni membangun dan merancang dengan buku-buku tentang arsitektur modern, klasik, dan inovatif</p>
+                <span class="genre-link-text">Jelajahi Koleksi →</span>
+            </a>
+
+            <a href="https://drive.google.com/drive/folders/1bYTGjYseRFZMWNjoAvpncisCGaG2TKBX?usp=drive_link" class="genre-card" target="_blank" rel="noopener noreferrer">
+<span class="genre-icon">🎭</span>
+                <h3 class="genre-title">Cerita Rakyat</h3>
+                <p class="genre-description">Temukan warisan budaya leluhur dengan koleksi cerita rakyat, dongeng tradisional, dan legenda nusantara</p>
+                <span class="genre-link-text">Jelajahi Koleksi →</span>
+            </a>
+
+            <a href="https://drive.google.com/drive/folders/14CEdhh-9Pbd6Xdc3ykk93dvu3LUwUcsZ?usp=drive_link" class="genre-card" target="_blank" rel="noopener noreferrer">
+                <span class="genre-icon">🌍</span>
+                <h3 class="genre-title">Alam dan Lingkungan</h3>
+                <p class="genre-description">Pahami pentingnya kelestarian alam dengan buku tentang lingkungan, konservasi, dan keberlanjutan</p>
+                <span class="genre-link-text">Jelajahi Koleksi →</span>
+            </a>
+
+            <a href="https://drive.google.com/drive/folders/1soOKGZkzt0JHPp5KzJW2FMsAV93JlQp4?usp=drive_link
+" class="genre-card" target="_blank" rel="noopener noreferrer">
+                <span class="genre-icon">🗺️</span>
+                <h3 class="genre-title">Petualangan</h3>
+                <p class="genre-description">Rasakan sensasi petualangan melalui cerita eksplorasi, perjalanan, dan kisah-kisah mendebarkan</p>
+                <span class="genre-link-text">Jelajahi Koleksi →</span>
+            </a>
+
+            <a href="https://drive.google.com/drive/folders/10RKxpcyuMG-63JYQ00_g4NF9kUsP2J3H?usp=drive_link" class="genre-card" target="_blank" rel="noopener noreferrer">
+                <span class="genre-icon">👶</span>
+                <h3 class="genre-title">Anak Indonesia</h3>
+                <p class="genre-description">Buku-buku edukatif dan cerita yang menginspirasi untuk anak-anak Indonesia dengan nilai-nilai budaya lokal</p>
+                <span class="genre-link-text">Jelajahi Koleksi →</span>
+            </a>
+
+            <a href="https://drive.google.com/drive/folders/1r0sFesKElb_VByoeBIF6nAoRyAOLdUQU?usp=drive_link" class="genre-card" target="_blank" rel="noopener noreferrer">
+                <span class="genre-icon">🎨</span>
+                <h3 class="genre-title">Seni dan Budaya</h3>
+                <p class="genre-description">Menyelami kekayaan seni dan budaya nusantara serta dunia melalui koleksi buku yang menginspirasi</p>
+                <span class="genre-link-text">Jelajahi Koleksi →</span>
+            </a>
+
+            <a href="https://drive.google.com/drive/folders/1MG6SKvPpDWTSZ9ZZM47JQhumdyBvaTeP?usp=drive_link" class="genre-card" target="_blank" rel="noopener noreferrer">
+                <span class="genre-icon">🍽️</span>
+                <h3 class="genre-title">Kuliner</h3>
+                <p class="genre-description">Jelajahi cita rasa nusantara dan dunia dengan koleksi buku resep, sejarah kuliner, dan tips memasak</p>
+                <span class="genre-link-text">Jelajahi Koleksi →</span>
+            </a>
+        </div>
+
+        <div class="stats-section">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">8</div>
+                    <div class="stat-label">Genre Tersedia</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">800+</div>
+                    <div class="stat-label">Koleksi Buku</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">Gratis</div>
+                    <div class="stat-label">Akses 24/7</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Digital</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const genreCards = document.querySelectorAll('.genre-card');
+            
+            genreCards.forEach(card => {
+                card.addEventListener('click', function(e) {
+                    // Add click animation
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 150);
+                });
+            });
+
+            window.addEventListener('scroll', function() {
+                const scrolled = window.pageYOffset;
+                const header = document.querySelector('.header');
+                header.style.transform = `translateY(${scrolled * 0.5}px)`;
+            });
+        });
+
+        function animateStats() {
+            const statNumbers = document.querySelectorAll('.stat-number');
+            statNumbers.forEach(stat => {
+                const targetNumber = stat.textContent.replace(/[^\d]/g, '');
+                if (targetNumber) {
+                    let currentNumber = 0;
+                    const increment = Math.ceil(targetNumber / 50);
+                    const timer = setInterval(() => {
+                        currentNumber += increment;
+                        if (currentNumber >= targetNumber) {
+                            currentNumber = targetNumber;
+                            clearInterval(timer);
+                        }
+                        stat.textContent = stat.textContent.replace(/\d+/, currentNumber);
+                    }, 50);
+                }
+            });
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateStats();
+                    observer.disconnect();
+                }
+            });
+        });
+
+        observer.observe(document.querySelector('.stats-section'));
+    </script>
+</body>
+</html>
