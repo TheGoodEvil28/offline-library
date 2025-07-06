@@ -272,6 +272,49 @@
          grid-template-columns: 1fr;
      }
  }
+
+ /* Tambahan responsive untuk button & logo */
+@media (max-width: 768px) {
+    .genre-link-text {
+        padding: 10px 20px;
+        font-size: 0.95rem;
+    }
+
+    .header img {
+        width: 60px;
+    }
+
+    .genre-card {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .genre-link-text {
+        padding: 8px 16px;
+        font-size: 0.85rem;
+    }
+
+    .header img {
+        width: 50px;
+        margin-bottom: 10px;
+    }
+
+    .genre-title {
+        font-size: 1.2rem;
+    }
+
+    .genre-description {
+        font-size: 0.9rem;
+    }
+
+    .footer {
+        font-size: 0.8rem;
+        padding: 20px 10px;
+    }
+}
+
+
  /* Animation delays for cards */
  
  .genre-card:nth-child(1) {
@@ -309,3 +352,67 @@
  .genre-card:nth-child(9) {
      animation: fadeInUp 0.8s ease-out 0.9s both;
  }
+
+ .footer {
+    margin-top: 50px;
+    padding: 25px 15px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.95rem;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 0 0 20px 20px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+
+.logo-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.logo-group img {
+    height: 80px;
+    object-fit: contain;
+    max-width: 100%;
+}
+
+@media (max-width: 768px) {
+    .logo-group img {
+        height: 60px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo-group img {
+        height: 50px;
+    }
+}
+
+.genre-link-text {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    padding: 12px 25px;
+    font-size: 1rem;
+    border-radius: 25px;
+}
+
+@media (max-width: 768px) {
+    .genre-link-text {
+        font-size: 0.95rem;
+        padding: 10px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .genre-link-text {
+        font-size: 0.85rem;
+        padding: 8px 16px;
+    }
+}
