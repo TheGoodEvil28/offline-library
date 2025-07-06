@@ -128,9 +128,7 @@ function App() {
 
   <h1>📚 Perpustakaan Digital</h1>
   <p>Jelajahi Koleksi Buku Berdasarkan Genre</p>
-  <p className="subtitle">
-    Temukan ribuan buku berkualitas dalam berbagai kategori
-  </p>
+ 
 </div>
 
 
@@ -174,7 +172,7 @@ function App() {
       </div>
 
      <footer className="footer">
-  &copy; {new Date().getFullYear()} Created by MMD FILKOM UB 25 – Desa Kuningan
+  &copy;  Created by MMD FILKOM UB 2025 – Kelompok 25 Desa Kuningan
 </footer>
 
     </div>
