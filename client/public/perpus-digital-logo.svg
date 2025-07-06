@@ -1,0 +1,8 @@
+
+<svg width="150" height="150" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="64" height="64" rx="12" fill="#4F46E5"/>
+  <path d="M20 18C20 16.8954 20.8954 16 22 16H42C43.1046 16 44 16.8954 44 18V46C44 47.1046 43.1046 48 42 48H22C20.8954 48 20 47.1046 20 46V18Z" fill="white"/>
+  <path d="M24 22H40V24H24V22ZM24 28H40V30H24V28ZM24 34H40V36H24V34Z" fill="#4F46E5"/>
+  <circle cx="32" cy="52" r="2" fill="white"/>
+  <text x="32" y="60" font-size="6" text-anchor="middle" fill="white" font-family="sans-serif">Perpus Digital</text>
+</svg>
