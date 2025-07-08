@@ -150,23 +150,26 @@ function App() {
       </div>
 
       <div className="stats-section">
-        <div className="stats-grid">
-         <div className="stat-item">
-  <div className="stat-number" data-number="8">0</div>
-  <div className="stat-label">Genre Tersedia</div>
+  <div className="stats-grid">
+    <div className="stat-item">
+      <div className="stat-number" data-number="8">0</div>
+      <div className="stat-label">Genre Tersedia</div>
+    </div>
+    <div className="stat-item">
+      <div className="stat-number" data-number="100">0</div>
+      <div className="stat-label">Koleksi Buku</div>
+    </div>
+    <div className="stat-item">
+      <div className="stat-number" data-number="Gratis">Gratis</div>
+      <div className="stat-label">Akses</div>
+    </div>
+    <div className="stat-item">
+      <div className="stat-number" data-number="100%">100%</div>
+      <div className="stat-label">Digital</div>
+    </div>
+  </div>
 </div>
-<div className="stat-item">
-  <div className="stat-number" data-number="100">0</div>
-  <div className="stat-label">Koleksi Buku</div>
-</div>
-<div className="stat-item">
-  <div className="stat-number" data-number="24">0</div>
-  <div className="stat-label">Akses 24 Jam</div>
-</div>
-<div className="stat-item">
-  <div className="stat-number" data-number="100">0</div>
-  <div className="stat-label">100% Digital</div>
-</div>
+
 
         </div>
       </div>
